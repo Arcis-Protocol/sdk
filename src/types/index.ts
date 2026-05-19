@@ -2,7 +2,7 @@ import type { Address, Hash } from "viem";
 
 // ── Chain Config ──
 
-export type SupportedChainId = 8453; // Base mainnet
+export type SupportedChainId = 8453 | 84532; // Base mainnet | Base Sepolia
 
 export interface ArcisAddresses {
   vault: Address;
