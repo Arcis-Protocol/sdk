@@ -1,0 +1,62 @@
+{
+  "name": "@arcis/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Arcis Protocol — agent vaults, credit, and bonds",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./abi": {
+      "import": "./dist/abi/index.mjs",
+      "require": "./dist/abi/index.js",
+      "types": "./dist/abi/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "keywords": [
+    "arcis",
+    "defi",
+    "ai-agents",
+    "erc4626",
+    "vault",
+    "base",
+    "ethereum",
+    "viem"
+  ],
+  "author": "Arcis Protocol <dev@arcis.money>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arcis-Protocol/sdk.git"
+  },
+  "homepage": "https://arcis.money",
+  "engines": {
+    "node": ">=18"
+  }
+}
