@@ -87,6 +87,20 @@ export const arcisVaultAbi = [
   },
   {
     type: "function",
+    name: "asset",
+    inputs: [],
+    outputs: [{ name: "", type: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "maxDeposit",
+    inputs: [{ name: "agent", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "exchangeRate",
     inputs: [],
     outputs: [{ name: "", type: "uint256" }],
@@ -184,8 +198,8 @@ export const arcisVaultAbi = [
     name: "Withdraw",
     inputs: [
       { name: "agent", type: "address", indexed: true },
-      { name: "shares", type: "uint256", indexed: false },
       { name: "amount", type: "uint256", indexed: false },
+      { name: "shares", type: "uint256", indexed: false },
     ],
   },
   {
