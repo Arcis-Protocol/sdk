@@ -9,6 +9,8 @@
   &nbsp;&middot;&nbsp;
   <a href="https://github.com/Arcis-Protocol/core">Contracts</a>
   &nbsp;&middot;&nbsp;
+  <a href="https://github.com/Arcis-Protocol/cli">CLI</a>
+  &nbsp;&middot;&nbsp;
   <a href="https://github.com/Arcis-Protocol/docs">Docs</a>
 </p>
 
@@ -206,6 +208,15 @@ npm run build    # Build with tsup
 npm test         # Run vitest
 npm run lint     # Type check
 ```
+
+## Related Repos
+
+| Repo | Description |
+|---|---|
+| [`core`](https://github.com/Arcis-Protocol/core) | Smart contracts — Foundry, 24 contracts |
+| [`cli`](https://github.com/Arcis-Protocol/cli) | Terminal interface — TUI for vault operations |
+| [`app`](https://github.com/Arcis-Protocol/app) | Landing page + dashboard — [arcis.money](https://arcis.money) |
+| [`docs`](https://github.com/Arcis-Protocol/docs) | Protocol docs, ATI spec, integration guides |
 
 ---
 
