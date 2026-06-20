@@ -135,12 +135,30 @@ export class ArcisVault {
       chain: null,
     });
 
-    await this.publicClient.waitForTransactionReceipt({
+    const receipt = await this.publicClient.waitForTransactionReceipt({
       hash: txHash,
     });
 
-    // Get USDC balance change from Transfer event
-    const amount = await this.previewWithdraw(shares);
+    // Parse Withdraw event to get exact USDC returned (ATI v1.1: agent, amount, shares)
+    let amount = 0n;
+    for (const log of receipt.logs) {
+      try {
+        const decoded = decodeEventLog({
+          abi: arcisVaultAbi,
+          data: log.data,
+          topics: log.topics,
+        });
+        if (decoded.eventName === "Withdraw") {
+          amount = (decoded.args as any).amount;
+          break;
+        }
+      } catch { /* not our event */ }
+    }
+
+    // Fallback to preview if event parsing fails
+    if (amount === 0n) {
+      amount = await this.previewWithdraw(shares);
+    }
 
     return { txHash, amount, shares };
   }
@@ -285,6 +303,25 @@ export class ArcisVault {
       abi: arcisVaultAbi,
       functionName: "exchangeRate",
     });
+  }
+
+  /** The underlying asset token address — ATI v1.1 discovery */
+  async asset(): Promise<Address> {
+    return this.publicClient.readContract({
+      address: this.config.addresses.vault,
+      abi: arcisVaultAbi,
+      functionName: "asset",
+    }) as Promise<Address>;
+  }
+
+  /** Maximum deposit amount for a given agent — ATI v1.1 */
+  async maxDeposit(agent: Address): Promise<bigint> {
+    return this.publicClient.readContract({
+      address: this.config.addresses.vault,
+      abi: arcisVaultAbi,
+      functionName: "maxDeposit",
+      args: [agent],
+    }) as Promise<bigint>;
   }
 
   // ════════════════════════════════════════════════════════════════
