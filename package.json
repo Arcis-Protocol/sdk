@@ -1,5 +1,5 @@
 {
-  "name": "@arcis/sdk",
+  "name": "@arcisprotocol/sdk",
   "version": "0.1.0",
   "description": "TypeScript SDK for Arcis Protocol — agent vaults, credit, and bonds",
   "main": "dist/index.js",
