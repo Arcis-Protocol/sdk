@@ -3,6 +3,7 @@ import {
   type PublicClient,
   type WalletClient,
   type Hash,
+  decodeEventLog,
 } from "viem";
 import { agentCreditAbi } from "../abi/credit.js";
 import type {
@@ -73,13 +74,25 @@ export class AgentCredit {
       chain: null,
     });
 
-    await this.publicClient.waitForTransactionReceipt({
+    const receipt = await this.publicClient.waitForTransactionReceipt({
       hash: txHash,
     });
 
     // Extract loanId from LoanCreated event
-    // For now, read loanCount as a fallback
-    const loanId = 0n; // Will be parsed from event in production
+    let loanId = 0n;
+    for (const log of receipt.logs) {
+      try {
+        const decoded = decodeEventLog({
+          abi: agentCreditAbi,
+          data: log.data,
+          topics: log.topics,
+        });
+        if (decoded.eventName === "LoanCreated") {
+          loanId = (decoded.args as any).loanId;
+          break;
+        }
+      } catch { /* not our event */ }
+    }
 
     return { txHash, loanId };
   }

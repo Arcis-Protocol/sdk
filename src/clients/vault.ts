@@ -6,6 +6,7 @@ import {
 
 
   maxUint256,
+  decodeEventLog,
 } from "viem";
 import { arcisVaultAbi } from "../abi/vault.js";
 import { erc20Abi } from "../abi/erc20.js";
@@ -86,19 +87,35 @@ export class ArcisVault {
     });
 
     // Wait for receipt and extract shares from event
-    await this.publicClient.waitForTransactionReceipt({
+    const receipt = await this.publicClient.waitForTransactionReceipt({
       hash: txHash,
     });
 
-    // Parse Deposit event to get shares
+    // Parse Deposit event to get exact shares received
+    let shares = 0n;
+    for (const log of receipt.logs) {
+      try {
+        const decoded = decodeEventLog({
+          abi: arcisVaultAbi,
+          data: log.data,
+          topics: log.topics,
+        });
+        if (decoded.eventName === "Deposit") {
+          shares = (decoded.args as any).shares;
+          break;
+        }
+      } catch { /* not our event */ }
+    }
 
-    // Fallback: read shares from balanceOf
-    const shares = await this.publicClient.readContract({
-      address: this.config.addresses.vault,
-      abi: arcisVaultAbi,
-      functionName: "balanceOf",
-      args: [account],
-    });
+    // Fallback: read shares from balanceOf if event parsing failed
+    if (shares === 0n) {
+      shares = await this.publicClient.readContract({
+        address: this.config.addresses.vault,
+        abi: arcisVaultAbi,
+        functionName: "balanceOf",
+        args: [account],
+      }) as bigint;
+    }
 
     return { txHash, shares, amount };
   }
