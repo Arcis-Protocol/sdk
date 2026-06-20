@@ -230,7 +230,7 @@ npm run lint     # Type check
 
 | Repo | Description |
 |---|---|
-| [`core`](https://github.com/Arcis-Protocol/core) | Smart contracts — Foundry, 24 contracts, 90 tests |
+| [`core`](https://github.com/Arcis-Protocol/core) | Smart contracts — Foundry, 24 contracts, 116 tests |
 | [`mcp`](https://github.com/Arcis-Protocol/mcp) | MCP Server — connect any AI agent in one tool call |
 | [`cli`](https://github.com/Arcis-Protocol/cli) | Terminal interface — TUI for vault operations |
 | [`app`](https://github.com/Arcis-Protocol/app) | Landing page + dashboard — [arcis.money](https://arcis.money) |
