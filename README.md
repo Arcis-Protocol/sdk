@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-  <strong>@arcis/sdk</strong>
+  <strong>@arcisprotocol/sdk</strong>
   <br />
   <em>TypeScript SDK for Arcis Protocol</em>
   <br />
@@ -23,13 +23,13 @@ Built on [viem](https://viem.sh). Works with any EVM wallet, agent framework, or
 ## Install
 
 ```bash
-npm install @arcis/sdk viem
+npm install @arcisprotocol/sdk viem
 ```
 
 ## Quick Start
 
 ```typescript
-import { Arcis, parseUSDC, formatUSDC } from "@arcis/sdk";
+import { Arcis, parseUSDC, formatUSDC } from "@arcisprotocol/sdk";
 import { createPublicClient, createWalletClient, http } from "viem";
 import { base } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
@@ -62,7 +62,7 @@ await arcis.vault.withdraw(shares);
 Arcis is designed for autonomous agents. No UI required. Here is the minimal integration for any agent framework.
 
 ```typescript
-import { ArcisVault, BASE_CONFIG, parseUSDC } from "@arcis/sdk";
+import { ArcisVault, BASE_CONFIG, parseUSDC } from "@arcisprotocol/sdk";
 
 // Your agent's viem clients (already configured)
 const vault = new ArcisVault(BASE_CONFIG, publicClient, walletClient);
@@ -84,6 +84,7 @@ const arcis = new Arcis(publicClient, walletClient?, config?);
 
 arcis.vault   // ArcisVault instance
 arcis.credit  // AgentCredit instance
+arcis.bonds   // RevenueBond instance (when bondFactory configured)
 ```
 
 ### `ArcisVault`
@@ -118,6 +119,22 @@ Identity-aware lending against raUSDC collateral.
 | `getLoan(loanId)` | Full loan details | `Loan` |
 | `lendingPool()` | Available capital to borrow | `bigint` |
 
+### `RevenueBond`
+
+Phase 3 — agents issue bonds, humans buy yield.
+
+| Method | Description | Returns |
+|---|---|---|
+| `issueBond(source, principal, couponBps, duration)` | Issue a new revenue bond | `{ txHash, bondId }` |
+| `purchase(bondId, amount)` | Buy bond tokens with USDC | `{ txHash, tokens }` |
+| `claimCoupon(bondId)` | Claim accrued coupon | `{ txHash, payout }` |
+| `redeem(bondId)` | Redeem principal at maturity | `{ txHash, principal }` |
+| `serviceDebt(bondId)` | Service debt from escrow | `Hash` |
+| `getBond(bondId)` | Bond details | `Bond` |
+| `holderPosition(bondId, holder)` | Holder's bond position | `BondPosition` |
+| `escrowBalance(bondId)` | Revenue in escrow | `bigint` |
+| `bondCount()` | Total bonds issued | `bigint` |
+
 ### Utilities
 
 ```typescript
@@ -128,7 +145,7 @@ import {
   formatCollateralRatio,// 15000n -> "150%"
   formatHealthFactor,   // 1.5e18 -> "1.50"
   formatExchangeRate,   // 1.05e18 -> "1.0500"
-} from "@arcis/sdk";
+} from "@arcisprotocol/sdk";
 ```
 
 ### Constants
@@ -142,13 +159,13 @@ import {
   BPS_DENOMINATOR,          // 10_000
   TIER_LABELS,              // ["No Identity", "Novice", ...]
   DEFAULT_COLLATERAL_RATIOS,// [20000n, 17500n, ...]
-} from "@arcis/sdk";
+} from "@arcisprotocol/sdk";
 ```
 
 ### ABIs
 
 ```typescript
-import { arcisVaultAbi, agentCreditAbi, erc20Abi } from "@arcis/sdk/abi";
+import { arcisVaultAbi, agentCreditAbi, revenueBondFactoryAbi, erc20Abi } from "@arcisprotocol/sdk/abi";
 ```
 
 ## Examples
@@ -213,10 +230,12 @@ npm run lint     # Type check
 
 | Repo | Description |
 |---|---|
-| [`core`](https://github.com/Arcis-Protocol/core) | Smart contracts — Foundry, 24 contracts |
+| [`core`](https://github.com/Arcis-Protocol/core) | Smart contracts — Foundry, 24 contracts, 90 tests |
+| [`mcp`](https://github.com/Arcis-Protocol/mcp) | MCP Server — connect any AI agent in one tool call |
 | [`cli`](https://github.com/Arcis-Protocol/cli) | Terminal interface — TUI for vault operations |
 | [`app`](https://github.com/Arcis-Protocol/app) | Landing page + dashboard — [arcis.money](https://arcis.money) |
 | [`docs`](https://github.com/Arcis-Protocol/docs) | Protocol docs, ATI spec, integration guides |
+| [`monitor`](https://github.com/Arcis-Protocol/monitor) | On-chain monitoring + Telegram alerts |
 
 ---
 
