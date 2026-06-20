@@ -9,6 +9,7 @@ export interface ArcisAddresses {
   credit: Address;
   router: Address;
   usdc: Address;
+  bondFactory?: Address;
 }
 
 export interface ArcisConfig {
@@ -104,4 +105,55 @@ export interface FormatOptions {
   decimals?: number;
   /** Whether to include $ prefix (default: true) */
   prefix?: boolean;
+}
+
+// ── Bond Types ──
+
+export enum BondStatus {
+  Active = 0,
+  Matured = 1,
+  Defaulted = 2,
+  Cancelled = 3,
+}
+
+export interface Bond {
+  id: bigint;
+  agent: Address;
+  revenueSource: Address;
+  principal: bigint;
+  filled: bigint;
+  couponBps: bigint;
+  maturityBlock: bigint;
+  issuedBlock: bigint;
+  totalCouponPaid: bigint;
+  status: BondStatus;
+}
+
+export interface BondPosition {
+  /** Bond tokens held by this address */
+  balance: bigint;
+  /** Claimable coupon in USDC */
+  claimable: bigint;
+  /** Percentage of bond owned (bps) */
+  ownershipBps: bigint;
+}
+
+export interface IssueBondResult {
+  txHash: Hash;
+  bondId: bigint;
+}
+
+export interface PurchaseResult {
+  txHash: Hash;
+  tokens: bigint;
+}
+
+export interface ClaimResult {
+  txHash: Hash;
+  payout: bigint;
+}
+
+export interface RedeemResult {
+  txHash: Hash;
+  principal: bigint;
 }

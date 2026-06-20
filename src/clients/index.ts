@@ -1,6 +1,7 @@
 import type { PublicClient, WalletClient } from "viem";
 import { ArcisVault } from "./vault.js";
 import { AgentCredit } from "./credit.js";
+import { RevenueBond } from "./bond.js";
 import type { ArcisConfig } from "../types/index.js";
 import { BASE_CONFIG } from "../utils/constants.js";
 
@@ -44,6 +45,7 @@ import { BASE_CONFIG } from "../utils/constants.js";
 export class Arcis {
   public readonly vault: ArcisVault;
   public readonly credit: AgentCredit;
+  public readonly bonds?: RevenueBond;
   public readonly config: ArcisConfig;
 
   constructor(
@@ -54,5 +56,14 @@ export class Arcis {
     this.config = config;
     this.vault = new ArcisVault(config, publicClient, walletClient);
     this.credit = new AgentCredit(config, publicClient, walletClient);
+
+    if (config.addresses.bondFactory) {
+      this.bonds = new RevenueBond(
+        publicClient,
+        config.addresses.bondFactory,
+        config.addresses.usdc,
+        walletClient,
+      );
+    }
   }
 }

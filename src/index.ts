@@ -2,6 +2,7 @@
 export { Arcis } from "./clients/index.js";
 export { ArcisVault } from "./clients/vault.js";
 export { AgentCredit } from "./clients/credit.js";
+export { RevenueBond } from "./clients/bond.js";
 
 // ── Types ──
 export type {
@@ -18,11 +19,20 @@ export type {
   CreditState,
   BorrowResult,
   FormatOptions,
+  Bond,
+  BondPosition,
+  IssueBondResult,
+  PurchaseResult,
+  ClaimResult,
+  RedeemResult,
 } from "./types/index.js";
+
+export { BondStatus } from "./types/index.js";
 
 // ── ABIs ──
 export { arcisVaultAbi } from "./abi/vault.js";
 export { agentCreditAbi } from "./abi/credit.js";
+export { revenueBondFactoryAbi } from "./abi/bond.js";
 export { erc20Abi } from "./abi/erc20.js";
 
 // ── Utils ──
