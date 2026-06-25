@@ -13,10 +13,10 @@ npm install @arcisprotocol/sdk viem
 ```typescript
 import { Arcis, parseUSDC } from "@arcisprotocol/sdk";
 import { createPublicClient, createWalletClient, http } from "viem";
-import { baseSepolia } from "viem/chains";
+import { baseMainnet } from "viem/chains";
 
-const publicClient = createPublicClient({ chain: baseSepolia, transport: http() });
-const walletClient = createWalletClient({ chain: baseSepolia, transport: http(), account });
+const publicClient = createPublicClient({ chain: baseMainnet, transport: http() });
+const walletClient = createWalletClient({ chain: baseMainnet, transport: http(), account });
 
 const arcis = new Arcis(publicClient, walletClient);
 
