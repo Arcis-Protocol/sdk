@@ -67,13 +67,13 @@ arcis.bonds.redeem(bondId)         // Redeem at maturity
 arcis.bonds.serviceDebt(bondId)    // Service bond obligations
 ```
 
-## Contract Addresses (Base Sepolia)
+## Contract Addresses (Base Mainnet)
 
 | Contract | Address |
 |---|---|
-| ArcisVault | `0xa8eF658E125C7f6D7aFa9B6b8035b66b32CBE98d` |
-| AgentCredit | `0x019540E33a0292a9DDE36bD9Ef11774d5A1Ce6FC` |
-| ATIRouter | `0x0281e7D37683c585325004F84e0b94170c78d5B4` |
+| ArcisVault | `0x00325d9da832b38179ed2f0dabd4062d93e325a7` |
+| ATIRouter | `0xeC3b7Daa942C03651D55A4A01797498fA6dB728F` |
+| StrategyAave | `0x43626D6162Ccb12328B989BB228DaD2941F2F12a` |
 
 ## Related Repos
 
