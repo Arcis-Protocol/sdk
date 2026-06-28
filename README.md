@@ -74,6 +74,8 @@ arcis.bonds.serviceDebt(bondId)    // Service bond obligations
 | ArcisVault | `0x00325d9da832b38179ed2f0dabd4062d93e325a7` |
 | ATIRouter | `0xeC3b7Daa942C03651D55A4A01797498fA6dB728F` |
 | StrategyAave | `0x43626D6162Ccb12328B989BB228DaD2941F2F12a` |
+| RevenueBondFactory | `0xeb65d8bb08e0ea4a6bb9162d53d1b444f99681ba` |
+| IdentityRegistry | `0xaa4da295dd368c0f10128654af76e3f002e20e71` |
 
 ## Related Repos
 

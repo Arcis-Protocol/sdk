@@ -21,7 +21,7 @@ export const BASE_CONFIG: ArcisConfig = {
 
 export const BASE_SEPOLIA_ADDRESSES: ArcisAddresses = {
   vault: "0xa8eF658E125C7f6D7aFa9B6b8035b66b32CBE98d",
-  credit: "0x019540E33a0292a9DDE36bD9Ef11774d5A1Ce6FC",
+  credit: "0xdf31800e620f728297340d66acf5a306f07ce7a1",
   router: "0x0281e7D37683c585325004F84e0b94170c78d5B4",
   usdc: "0x29440A12f15fe6bDf5F624f4eeEB298CCb782f05",   // MockUSDC
 } as const;
