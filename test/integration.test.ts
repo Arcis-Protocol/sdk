@@ -25,6 +25,7 @@ import { parseUSDC, formatUSDC, formatBps, formatCollateralRatio, formatHealthFa
 import { erc20Abi } from "../src/abi/erc20";
 
 // ── Test Config ──
+// TESTNET ONLY — this key has no mainnet funds and is publicly known
 const DEPLOYER_PK = "0x3e7de7ad9f0b2f3503749d8aa093ece3a93c3f44909946353b00c9059c0a3d38";
 const RPC_URL = "https://sepolia.base.org";
 
