@@ -3,6 +3,7 @@ export { Arcis } from "./clients/index.js";
 export { ArcisVault } from "./clients/vault.js";
 export { AgentCredit } from "./clients/credit.js";
 export { RevenueBond } from "./clients/bond.js";
+export { IdleCapitalManager } from "./clients/idle-capital.js";
 
 // ── Types ──
 export type {
@@ -36,6 +37,11 @@ export { revenueBondFactoryAbi } from "./abi/bond.js";
 export { erc20Abi } from "./abi/erc20.js";
 
 // ── Utils ──
+export type {
+  IdleCapitalOptions,
+  IdleCapitalStatus,
+} from "./clients/idle-capital.js";
+
 export {
   parseUSDC,
   formatUSDC,
@@ -48,12 +54,13 @@ export {
 export {
   BASE_CONFIG,
   BASE_ADDRESSES,
-  BASE_SEPOLIA_CONFIG,
-  BASE_SEPOLIA_ADDRESSES,
-  BASE_SEPOLIA_EXTRAS,
+  BASE_ADDRESSES_EXTENDED,
   USDC_DECIMALS,
   WAD,
   BPS_DENOMINATOR,
   TIER_LABELS,
   DEFAULT_COLLATERAL_RATIOS,
+  AAVE_POOL_BASE,
+  VAULT_ALLOCATION_BPS,
+  VAULT_FEE_BPS,
 } from "./utils/constants.js";
