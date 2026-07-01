@@ -16,6 +16,7 @@ export const BASE_ADDRESSES_EXTENDED = {
   identity: "0xaa4da295dd368c0f10128654af76e3f002e20e71",
   strategyAave: "0x43626D6162Ccb12328B989BB228DaD2941F2F12a",
   allocator: "0x7Fd5d7b49694858FCf143E0039e83cDB0196DD7A",
+  custosToken: "0xD7C479F720b0bC2FF1088A16D1c06C3e11C62882",
 } as const;
 
 export const BASE_CONFIG: ArcisConfig = {
