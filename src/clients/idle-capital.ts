@@ -34,7 +34,6 @@ import {
   type PublicClient,
   type WalletClient,
   type Hash,
-  formatUnits,
   maxUint256,
 } from "viem";
 import { arcisVaultAbi } from "../abi/vault.js";
@@ -170,12 +169,14 @@ export class IdleCapitalManager {
     if (allowance < amount) {
       const approveTx = await this.wall.writeContract({
         address: usdc, abi: erc20Abi, functionName: "approve", args: [vault, maxUint256],
+        account: this.wall.account!, chain: this.wall.chain,
       });
       await this.pub.waitForTransactionReceipt({ hash: approveTx });
     }
 
     const tx = await this.wall.writeContract({
       address: vault, abi: arcisVaultAbi, functionName: "deposit", args: [amount],
+      account: this.wall.account!, chain: this.wall.chain,
     });
     await this.pub.waitForTransactionReceipt({ hash: tx });
 
@@ -193,6 +194,7 @@ export class IdleCapitalManager {
 
     const tx = await this.wall.writeContract({
       address: vault, abi: arcisVaultAbi, functionName: "withdraw", args: [shares],
+      account: this.wall.account!, chain: this.wall.chain,
     });
     await this.pub.waitForTransactionReceipt({ hash: tx });
 

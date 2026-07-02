@@ -1,7 +1,7 @@
 {
   "name": "@arcisprotocol/sdk",
-  "version": "0.3.1",
-  "description": "TypeScript SDK for Arcis Protocol — agent vaults, credit, and bonds",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for Arcis Protocol \u2014 agent vaults, credit, and bonds",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -58,5 +58,8 @@
   "homepage": "https://arcis.money",
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
